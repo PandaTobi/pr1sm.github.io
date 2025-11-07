@@ -7,9 +7,10 @@ interface RotatingTextProps {
   words: string[]
   className?: string
   interval?: number
+  wrapperClassName?: string
 }
 
-export function RotatingText({ words, className = "", interval = 3000 }: RotatingTextProps) {
+export function RotatingText({ words, className = "", interval = 3000, wrapperClassName = "" }: RotatingTextProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
@@ -21,7 +22,10 @@ export function RotatingText({ words, className = "", interval = 3000 }: Rotatin
   }, [words.length, interval])
 
   return (
-    <span className={`inline-block relative ${className}`}>
+    <span
+      className={`relative inline-flex overflow-hidden leading-tight ${wrapperClassName}`}
+      style={{ minHeight: "1.5em" }}
+    >
       <AnimatePresence mode="wait">
         <motion.span
           key={currentIndex}
@@ -29,7 +33,7 @@ export function RotatingText({ words, className = "", interval = 3000 }: Rotatin
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -20, opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-block bg-gradient-to-r from-cyan-400 via-teal-500 to-emerald-500 bg-clip-text text-transparent"
+          className={`inline-block ${className}`}
         >
           {words[currentIndex]}
         </motion.span>
@@ -37,4 +41,3 @@ export function RotatingText({ words, className = "", interval = 3000 }: Rotatin
     </span>
   )
 }
-

@@ -44,6 +44,38 @@ import {
   Wand2,
 } from "lucide-react"
 
+const createSeededRandom = (seed: number) => {
+  return () => {
+    let t = (seed += 0x6d2b79f5)
+    t = Math.imul(t ^ (t >>> 15), t | 1)
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+const FOOTER_PARTICLE_CONFIGS = Array.from({ length: 12 }, (_, i) => {
+  const rand = createSeededRandom(8000 + i)
+  const offset = () => rand() * 100 - 50
+
+  return {
+    animate: {
+      x: [offset(), offset(), offset()],
+      y: [offset(), offset(), offset()],
+      opacity: [0.2, 0.6, 0.2],
+      scale: [1, 1.5, 1],
+    },
+    transition: {
+      duration: 4 + rand() * 3,
+      repeat: Infinity,
+      delay: i * 0.3,
+    },
+    style: {
+      left: `${rand() * 100}%`,
+      top: `${rand() * 100}%`,
+    },
+  }
+})
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white overflow-x-hidden">
@@ -93,7 +125,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-bold mb-4 md:mb-6 tracking-tight leading-tight"
+            className="text-6xl md:text-8xl lg:text-9xl font-bold mb-1 md:mb-3 tracking-tight leading-tight"
           >
             <span className="bg-gradient-to-r from-white via-zinc-100 to-zinc-300 bg-clip-text text-transparent">
               Your Computer,
@@ -104,11 +136,12 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 md:mb-8 tracking-tight leading-tight"
+            className="text-6xl md:text-8xl lg:text-9xl font-bold mb-2 md:mb-4 tracking-tight leading-tight"
           >
             <RotatingText
               words={["Amplified", "Reimagined", "Supercharged", "Elevated", "Transformed"]}
               className="text-6xl md:text-8xl lg:text-9xl font-bold bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-shift"
+              wrapperClassName="justify-center"
             />
           </motion.div>
 
@@ -116,7 +149,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl md:text-2xl lg:text-3xl text-zinc-300 mb-8 md:mb-10 max-w-5xl mx-auto leading-relaxed font-light px-4"
+            className="text-xl md:text-2xl lg:text-3xl text-zinc-300 mb-6 md:mb-8 max-w-5xl mx-auto leading-relaxed font-light px-4"
           >
             The AI-native productivity layer for macOS. It knows your files, learns your workflows, 
             and executes with intention.{" "}
@@ -136,7 +169,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="mt-12 md:mt-16"
+            className="mt-8 md:mt-12"
           >
             <motion.div
               animate={{ y: [0, 10, 0] }}
@@ -375,7 +408,7 @@ export default function Home() {
                     <div className="hidden md:block w-1 h-1 rounded-full bg-zinc-700" />
                     <div className="flex items-center gap-2">
                       <Rocket size={16} className="text-violet-400" />
-                      <span>Launching Q2 2025</span>
+                      <span>Launching 2026</span>
                     </div>
                   </motion.div>
                 </div>
@@ -404,25 +437,13 @@ export default function Home() {
 
         {/* Floating particles */}
         <div className="hidden md:block">
-          {[...Array(12)].map((_, i) => (
+          {FOOTER_PARTICLE_CONFIGS.map((particle, i) => (
             <motion.div
               key={i}
               className="absolute w-1 h-1 rounded-full bg-cyan-500/40"
-              animate={{
-                x: [Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 100 - 50],
-                y: [Math.random() * 100 - 50, Math.random() * 100 - 50, Math.random() * 100 - 50],
-                opacity: [0.2, 0.6, 0.2],
-                scale: [1, 1.5, 1]
-              }}
-              transition={{
-                duration: 4 + Math.random() * 3,
-                repeat: Infinity,
-                delay: i * 0.3
-              }}
-              style={{
-                left: `${10 + (i * 8)}%`,
-                top: `${20 + Math.random() * 60}%`
-              }}
+              animate={particle.animate}
+              transition={particle.transition}
+              style={particle.style}
             />
           ))}
         </div>
@@ -517,4 +538,3 @@ export default function Home() {
     </main>
   )
 }
-

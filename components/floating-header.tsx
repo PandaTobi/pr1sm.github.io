@@ -1,10 +1,11 @@
 "use client"
 
+import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Sparkles, Menu } from "lucide-react"
+import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet"
 
 export function FloatingHeader() {
   const [isVisible, setIsVisible] = useState(true)
@@ -46,8 +47,14 @@ export function FloatingHeader() {
                 transition={{ delay: 0.2 }}
                 className="flex items-center space-x-3 group cursor-pointer"
               >
-                <div className="w-9 h-9 bg-gradient-to-br from-cyan-500 to-emerald-500 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/30 group-hover:shadow-cyan-500/50 transition-shadow">
-                  <Sparkles className="w-5 h-5 text-white" />
+                <div className="w-9 h-9 rounded-lg bg-black flex items-center justify-center shadow-lg shadow-cyan-500/30 group-hover:shadow-cyan-500/50 transition-shadow overflow-hidden">
+                  <Image
+                    src="/prism-logo.png"
+                    alt="Prism logo"
+                    width={36}
+                    height={36}
+                    priority
+                  />
                 </div>
                 <span className="text-xl font-bold bg-gradient-to-r from-white to-zinc-300 bg-clip-text text-transparent">
                   Prism
@@ -94,23 +101,56 @@ export function FloatingHeader() {
                       <Menu className="h-5 w-5" />
                     </Button>
                   </SheetTrigger>
-                  <SheetContent side="top" className="p-6">
+                  <SheetContent
+                    side="top"
+                    className="pt-24 pb-10 px-6 max-h-[85vh] overflow-y-auto"
+                    showCloseButton={false}
+                    title="Mobile navigation"
+                  >
+                    <div className="absolute inset-x-0 top-0 px-6 py-4 border-b border-zinc-800/60 bg-black/90 backdrop-blur">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center shadow-lg shadow-cyan-500/30 overflow-hidden">
+                            <Image
+                              src="/prism-logo.png"
+                              alt="Prism logo"
+                              width={28}
+                              height={28}
+                              priority
+                            />
+                          </div>
+                          <span className="text-lg font-semibold text-white">Prism</span>
+                        </div>
+                        <span className="text-xs uppercase tracking-[0.3em] text-zinc-500">Menu</span>
+                      </div>
+                    </div>
+
                     <div className="space-y-4">
-                      <a href="#features" className="block text-base font-medium text-zinc-200">
-                        Features
-                      </a>
-                      <a href="#memory" className="block text-base font-medium text-zinc-200">
-                        Memory
-                      </a>
-                      <a href="#automation" className="block text-base font-medium text-zinc-200">
-                        Automation
-                      </a>
-                      <a href="#autoscripter" className="block text-base font-medium text-zinc-200">
-                        Autoscripter
-                      </a>
-                      <a href="#waitlist" className="block">
-                        <Button className="w-full">Join Waitlist</Button>
-                      </a>
+                      <SheetClose asChild>
+                        <a href="#features" className="block text-lg font-medium text-white">
+                          Features
+                        </a>
+                      </SheetClose>
+                      <SheetClose asChild>
+                        <a href="#memory" className="block text-lg font-medium text-white">
+                          Memory
+                        </a>
+                      </SheetClose>
+                      <SheetClose asChild>
+                        <a href="#automation" className="block text-lg font-medium text-white">
+                          Automation
+                        </a>
+                      </SheetClose>
+                      <SheetClose asChild>
+                        <a href="#autoscripter" className="block text-lg font-medium text-white">
+                          Autoscripter
+                        </a>
+                      </SheetClose>
+                      <SheetClose asChild>
+                        <a href="#waitlist" className="block">
+                          <Button className="w-full">Join Waitlist</Button>
+                        </a>
+                      </SheetClose>
                     </div>
                   </SheetContent>
                 </Sheet>
@@ -122,4 +162,3 @@ export function FloatingHeader() {
     </AnimatePresence>
   )
 }
-

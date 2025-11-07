@@ -3,6 +3,39 @@
 import { motion } from "framer-motion"
 import { Brain, Clock, FileText, MessageSquare, Search, TrendingUp } from "lucide-react"
 
+const createSeededRandom = (seed: number) => {
+  // Deterministic mulberry32 PRNG keeps SSR/client output identical.
+  return () => {
+    let t = (seed += 0x6d2b79f5)
+    t = Math.imul(t ^ (t >>> 15), t | 1)
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+const PARTICLE_CONFIGS = Array.from({ length: 8 }, (_, i) => {
+  const rand = createSeededRandom(1000 + i)
+
+  const randomPercent = () => `${rand() * 100}%`
+
+  return {
+    animate: {
+      x: [rand() * 100, rand() * 100, rand() * 100],
+      y: [rand() * 100, rand() * 100, rand() * 100],
+      opacity: [0.2, 0.5, 0.2]
+    },
+    transition: {
+      duration: 3 + rand() * 2,
+      repeat: Infinity,
+      delay: i * 0.3
+    },
+    style: {
+      left: randomPercent(),
+      top: randomPercent()
+    }
+  }
+})
+
 export function MemorySection() {
   const memoryFeatures = [
     {
@@ -141,8 +174,8 @@ export function MemorySection() {
               </motion.div>
 
               {/* Connecting lines and nodes */}
-              <div className="relative w-full max-w-4xl -mt-4">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="relative w-full max-w-4xl -mt-4 hidden md:block">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                   {memoryFeatures.map((feature, idx) => (
                     <motion.div
                       key={idx}
@@ -248,28 +281,43 @@ export function MemorySection() {
             </div>
 
             {/* Floating particles */}
-            {[...Array(8)].map((_, i) => (
+            {PARTICLE_CONFIGS.map((particle, i) => (
               <motion.div
                 key={i}
                 className="absolute w-2 h-2 rounded-full bg-cyan-500/30"
-                animate={{
-                  x: [Math.random() * 100, Math.random() * 100, Math.random() * 100],
-                  y: [Math.random() * 100, Math.random() * 100, Math.random() * 100],
-                  opacity: [0.2, 0.5, 0.2]
-                }}
-                transition={{
-                  duration: 3 + Math.random() * 2,
-                  repeat: Infinity,
-                  delay: i * 0.3
-                }}
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`
-                }}
+                animate={particle.animate}
+                transition={particle.transition}
+                style={particle.style}
               />
             ))}
           </div>
         </motion.div>
+
+        {/* Mobile feature list */}
+        <div className="md:hidden w-full max-w-xl mx-auto space-y-4 mb-12">
+          {memoryFeatures.map((feature, idx) => (
+            <motion.div
+              key={`mobile-feature-${idx}`}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              className="flex items-start gap-4 rounded-2xl border border-zinc-800/70 bg-zinc-900/80 p-4 shadow-lg shadow-black/20"
+            >
+              <div className={`p-3 rounded-2xl bg-gradient-to-br ${feature.color} text-white shadow-lg shadow-black/30`}>
+                {feature.icon}
+              </div>
+              <div>
+                <h4 className="text-base font-semibold text-white mb-1">
+                  {feature.title}
+                </h4>
+                <p className="text-sm text-zinc-400 leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
         {/* Example showcase */}
         <motion.div
@@ -277,7 +325,7 @@ export function MemorySection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="relative max-w-4xl mx-auto group"
+          className="relative max-w-4xl mx-auto group mt-12 md:mt-0"
         >
           <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-emerald-500 to-cyan-500 rounded-3xl blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-500" />
           
@@ -290,7 +338,7 @@ export function MemorySection() {
               }} />
             </div>
             
-            <div className="relative flex items-start space-x-6">
+            <div className="relative flex flex-col gap-6 md:flex-row md:items-start md:space-x-6">
               <motion.div 
                 className="flex-shrink-0 relative"
                 animate={{ 
@@ -333,6 +381,7 @@ export function MemorySection() {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </motion.div>
@@ -340,4 +389,3 @@ export function MemorySection() {
     </section>
   )
 }
-
