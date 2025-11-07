@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ScrollReveal } from "@/components/scroll-reveal"
@@ -125,7 +126,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-bold mb-1 md:mb-3 tracking-tight leading-tight"
+            className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-1 md:mb-3 tracking-tight leading-tight"
           >
             <span className="bg-gradient-to-r from-white via-zinc-100 to-zinc-300 bg-clip-text text-transparent">
               Your Computer,
@@ -136,11 +137,11 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-bold mb-2 md:mb-4 tracking-tight leading-tight"
+            className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-2 md:mb-4 tracking-tight leading-tight"
           >
             <RotatingText
               words={["Amplified", "Reimagined", "Supercharged", "Elevated", "Transformed"]}
-              className="text-6xl md:text-8xl lg:text-9xl font-bold bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-shift"
+              className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-shift"
               wrapperClassName="justify-center"
             />
           </motion.div>
@@ -462,8 +463,14 @@ export default function Home() {
                 className="relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-emerald-500 rounded-lg blur-xl opacity-50 group-hover:opacity-100 transition-opacity" />
-                <div className="relative w-12 h-12 bg-gradient-to-br from-cyan-500 to-emerald-500 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/60 transition-all">
-                  <Sparkles className="w-6 h-6 text-white" />
+                <div className="relative w-12 h-12 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/60 transition-all bg-black overflow-hidden">
+                  <Image
+                    src="/prism-logo.png"
+                    alt="Prism logo"
+                    width={40}
+                    height={40}
+                    priority
+                  />
                 </div>
               </motion.div>
               <div>
