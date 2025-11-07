@@ -88,7 +88,7 @@ export function WaitlistForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto">
+    <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto">
       <div className="flex flex-col sm:flex-row gap-3">
         <input
           type="email"
@@ -96,7 +96,7 @@ export function WaitlistForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
           required
-          className="flex-1 px-6 py-4 bg-zinc-900/80 border border-zinc-800/50 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all backdrop-blur-sm"
+          className="flex-1 min-w-0 w-full px-6 py-4 bg-zinc-900/80 border border-zinc-800/50 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all backdrop-blur-sm"
         />
         <button
           type="submit"

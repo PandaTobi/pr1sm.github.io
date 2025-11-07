@@ -65,7 +65,7 @@ export function AutoscripterSection() {
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-cyan-500/5" />
               
               <div className="relative z-10">
-                <div className="flex items-start space-x-6 mb-8">
+                <div className="flex flex-col items-center text-center gap-6 mb-8 md:flex-row md:text-left md:items-start md:space-x-6">
                   <motion.div
                     animate={{ rotate: [0, 10, -10, 0] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -73,17 +73,17 @@ export function AutoscripterSection() {
                   >
                     <div className="relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl blur-xl opacity-50" />
-                      <div className="relative p-4 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 border border-emerald-500/30">
-                        <Wand2 size={32} className="text-emerald-400" />
+                      <div className="relative p-4 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 border border-emerald-500/30 flex items-center justify-center">
+                        <Terminal size={32} className="text-emerald-400" />
                       </div>
                     </div>
                   </motion.div>
                   
-                  <div className="flex-1">
-                    <h3 className="text-3xl font-bold text-zinc-50 mb-3">
+                  <div className="flex-1 space-y-3">
+                    <h3 className="text-2xl md:text-3xl font-bold text-zinc-50">
                       Write Code by Describing It
                     </h3>
-                    <p className="text-zinc-400 text-lg leading-relaxed">
+                    <p className="text-zinc-400 text-base md:text-lg leading-relaxed">
                       Turn natural language into custom automations. Prism understands your intent, 
                       writes production-ready code, and integrates it seamlessly into your workflow.
                     </p>
@@ -221,4 +221,3 @@ export function AutoscripterSection() {
     </section>
   )
 }
-

@@ -19,12 +19,12 @@ export function FeatureCard({ icon, title, description, className }: FeatureCard
       transition={{ duration: 0.3 }}
       className={cn("group", className)}
     >
-      <Card className="h-full p-6 bg-gradient-to-br from-zinc-900 to-zinc-800 border-zinc-700 hover:border-zinc-600 transition-all duration-300 relative overflow-hidden">
+      <Card className="h-full p-6 bg-gradient-to-br from-zinc-900 to-zinc-800 border-zinc-700 hover:border-zinc-600 transition-all duration-300 relative overflow-hidden text-center md:text-left">
         {/* Gradient overlay on hover */}
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
         <div className="relative z-10">
-          <div className="mb-4 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300 transform group-hover:scale-110 inline-block">
+          <div className="mb-4 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300 transform group-hover:scale-110 inline-flex justify-center md:justify-start w-full">
             {icon}
           </div>
           <h3 className="text-xl font-bold mb-2 text-zinc-100">{title}</h3>
@@ -41,4 +41,3 @@ export function FeatureCard({ icon, title, description, className }: FeatureCard
     </motion.div>
   )
 }
-

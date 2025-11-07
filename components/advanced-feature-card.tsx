@@ -72,6 +72,7 @@ export function AdvancedFeatureCard({
       className={cn(
         "group relative overflow-hidden rounded-2xl p-8 bg-gradient-to-br from-zinc-950/90 via-zinc-900/90 to-zinc-950/90",
         "border border-zinc-800/50 hover:border-transparent transition-all duration-500",
+        "text-center md:text-left",
         colors.border,
         className
       )}
@@ -98,7 +99,7 @@ export function AdvancedFeatureCard({
       
       <div className="relative z-10">
         {/* Icon container */}
-        <div className="mb-6">
+        <div className="mb-6 flex justify-center md:justify-start">
           <div className={cn(
             "inline-flex p-4 rounded-2xl bg-gradient-to-br border backdrop-blur-sm",
             "from-zinc-900/80 to-zinc-800/80 border-zinc-700/50",
@@ -128,4 +129,3 @@ export function AdvancedFeatureCard({
     </motion.div>
   )
 }
-

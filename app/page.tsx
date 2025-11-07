@@ -126,7 +126,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-1 md:mb-3 tracking-tight leading-tight"
+            className="text-5xl sm:text-7xl lg:text-9xl font-bold mb-1 md:mb-3 tracking-tight leading-tight"
           >
             <span className="bg-gradient-to-r from-white via-zinc-100 to-zinc-300 bg-clip-text text-transparent">
               Your Computer,
@@ -150,7 +150,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl md:text-2xl lg:text-3xl text-zinc-300 mb-6 md:mb-8 max-w-5xl mx-auto leading-relaxed font-light px-4"
+            className="text-base sm:text-lg md:text-2xl lg:text-3xl text-zinc-300 mb-6 md:mb-8 max-w-5xl mx-auto leading-relaxed font-light px-4"
           >
             The AI-native productivity layer for macOS. It knows your files, learns your workflows, 
             and executes with intention.{" "}
@@ -341,7 +341,7 @@ export default function Home() {
               
               <div className="relative rounded-3xl border border-zinc-800/50 bg-zinc-950/50 backdrop-blur-sm overflow-hidden">
                 <div className="p-12 md:p-16 lg:p-20">
-                  <div className="text-center mb-12">
+                  <div className="max-w-2xl w-full mx-auto text-center mb-12">
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -358,13 +358,12 @@ export default function Home() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: 0.1 }}
-                      className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight"
+                      className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-center flex flex-col items-center space-y-2"
                     >
-                      <span className="bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">
+                      <span className="bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent block">
                         Your Productivity,
                       </span>
-                      <br />
-                      <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-shift">
+                      <span className="bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient-shift block">
                         Reimagined
                       </span>
                     </motion.h2>
@@ -374,21 +373,21 @@ export default function Home() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: 0.2 }}
-                      className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-10"
+                      className="text-base md:text-lg text-zinc-400 leading-relaxed mb-8"
                     >
                       Join thousands on the waitlist. Be among the first to experience the AI that knows your Mac as well as you do.
                     </motion.p>
-                  </div>
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="max-w-xl mx-auto mb-8"
-                  >
-                    <WaitlistForm />
-                  </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.3 }}
+                      className="w-full flex justify-center"
+                    >
+                      <WaitlistForm />
+                    </motion.div>
+                  </div>
 
                   <motion.div
                     initial={{ opacity: 0 }}
