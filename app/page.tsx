@@ -375,7 +375,7 @@ export default function Home() {
                       transition={{ duration: 0.6, delay: 0.2 }}
                       className="text-base md:text-lg text-zinc-400 leading-relaxed mb-8"
                     >
-                      Join thousands on the waitlist. Be among the first to experience the AI that knows your Mac as well as you do.
+                      Join the waitlist. Be among the first to experience the AI that knows your Mac as well as you do.
                     </motion.p>
 
                     <motion.div
